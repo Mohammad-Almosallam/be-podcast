@@ -1,83 +1,15 @@
-import { Entity, PrimaryColumn, Column } from "typeorm";
+// src/entities/episode.entity.ts
+import { Entity, PrimaryColumn } from "typeorm";
 import { NullableColumn } from "../decorators/nullable-column";
 
 @Entity()
 export class Episode {
-  @PrimaryColumn({ type: "bigint" })
-  trackId: number;
-
-  @Column()
-  trackName: string;
+  @PrimaryColumn({ type: "text" }) // or just omit type, string is default
+  trackId: string;
 
   @NullableColumn()
-  episodeGuid: string;
+  trackName: string; // title
 
   @NullableColumn()
-  description: string;
-
-  @NullableColumn()
-  shortDescription: string;
-
-  @NullableColumn()
-  releaseDate: string;
-
-  @NullableColumn()
-  feedUrl: string;
-
-  @NullableColumn({ type: "bigint" })
-  collectionId: number;
-
-  @NullableColumn()
-  collectionName: string;
-
-  @NullableColumn()
-  artworkUrl600: string;
-
-  @NullableColumn()
-  artworkUrl160: string;
-
-  @NullableColumn()
-  artworkUrl60: string;
-
-  @NullableColumn()
-  country: string;
-
-  @NullableColumn()
-  collectionViewUrl: string;
-
-  @NullableColumn()
-  trackViewUrl: string;
-
-  @NullableColumn()
-  contentAdvisoryRating: string;
-
-  @NullableColumn()
-  episodeUrl: string;
-
-  @NullableColumn()
-  previewUrl: string;
-
-  @NullableColumn()
-  episodeFileExtension: string;
-
-  @NullableColumn()
-  episodeContentType: string;
-
-  @NullableColumn({ type: "bigint" })
-  trackTimeMillis: number;
-
-  @Column("text", { array: true, nullable: true })
-  genres: { name: string; id: string }[];
-
-  @Column("text", { array: true, nullable: true })
-  artistIds: string[];
-
-  @NullableColumn()
-  closedCaptioning: string;
-
-  @NullableColumn()
-  wrapperType: string;
-
-  @NullableColumn()
-  kind: string;
+  artistName: string; // author
 }

@@ -43,36 +43,48 @@ export async function podcastRoutes(app: FastifyInstance) {
       const episodeRepo = AppDataSource.getRepository(Episode);
 
       // save new podcasts only (you can create a similar entity for episodes if needed)
-      const podcastTrackIds = podcasts.map((p: any) => p.trackId);
+      const podcastTrackIds = podcasts.map((p: any) => String(p.trackId));
       const existingPodcasts = await podcastRepo.find({
         where: {
           trackId: In(podcastTrackIds),
         },
       });
       const existingPodcastMap = new Map(
-        existingPodcasts.map((p) => [p.trackId, p])
+        existingPodcasts.map((p) => [String(p.trackId), p])
       );
       const podcastsToInsert = podcasts
         .filter((r: any) => !existingPodcastMap.has(r.trackId))
-        .map((r: any) => podcastRepo.create(r));
+        .map((r: any) =>
+          podcastRepo.create({
+            trackId: String(r.trackId),
+            trackName: r.trackName,
+            artistName: r.artistName,
+          })
+        );
 
       if (podcastsToInsert.length > 0) {
         await podcastRepo.save(podcastsToInsert);
       }
 
-      const episodeTrackIds = episodes.map((e: any) => e.trackId);
+      const episodeTrackIds = episodes.map((e: any) => String(e.trackId));
       const existingEpisodes = await episodeRepo.find({
         where: {
           trackId: In(episodeTrackIds),
         },
       });
       const existingEpisodeMap = new Map(
-        existingEpisodes.map((e) => [e.trackId, e])
+        existingEpisodes.map((e) => [String(e.trackId), e])
       );
 
       const newEpisodes = episodes
-        .filter((e: any) => !existingEpisodeMap.has(e.trackId))
-        .map((e: any) => episodeRepo.create(e));
+        .filter((e: any) => !existingEpisodeMap.has(String(e.trackId)))
+        .map((e: any) =>
+          episodeRepo.create({
+            trackId: String(e.trackId),
+            trackName: e.trackName,
+            artistName: e.artistName,
+          })
+        );
 
       if (newEpisodes.length > 0) {
         await episodeRepo.save(newEpisodes);
