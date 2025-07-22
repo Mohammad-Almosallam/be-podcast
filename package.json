@@ -1,0 +1,39 @@
+{
+  "name": "be-podcast",
+  "version": "1.0.0",
+  "description": "Thmanyah's assignment",
+  "main": "src/server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "fastify start src/server.js",
+    "dev": "ts-node src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mohammad-Almosallam/be-podcast.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mohammad-Almosallam/be-podcast/issues"
+  },
+  "homepage": "https://github.com/Mohammad-Almosallam/be-podcast#readme",
+  "dependencies": {
+    "@fastify/cors": "^11.0.1",
+    "axios": "^1.10.0",
+    "dotenv": "^17.2.0",
+    "fastify": "^5.4.0",
+    "fastify-cli": "^7.4.0",
+    "fastify-cors": "^6.0.3",
+    "pg": "^8.16.3",
+    "pino-pretty": "^13.0.0",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.25"
+  },
+  "devDependencies": {
+    "@tsconfig/node23": "^23.0.2",
+    "@types/node": "^24.0.15",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
