@@ -24,4 +24,7 @@ export class Episode {
 
   @NullableColumn()
   duration: string;
+
+  @NullableColumn()
+  audioUrl: string;
 }

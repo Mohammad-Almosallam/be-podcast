@@ -52,8 +52,9 @@ export async function podcastRoutes(app: FastifyInstance) {
       const existingPodcastMap = new Map(
         existingPodcasts.map((p) => [String(p.id), p])
       );
+
       const podcastsToInsert = podcasts
-        .filter((r: any) => !existingPodcastMap.has(r.trackId))
+        .filter((r: any) => !existingPodcastMap.has(String(r.trackId)))
         .map((r: any) =>
           podcastRepo.create({
             id: String(r.trackId),
@@ -88,6 +89,7 @@ export async function podcastRoutes(app: FastifyInstance) {
             imageUrl: e.artworkUrl600,
             publishedAt: e.releaseDate,
             duration: String(e.trackTimeMillis),
+            audioUrl: e.episodeUrl,
           })
         );
 
