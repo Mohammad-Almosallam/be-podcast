@@ -1,4 +1,3 @@
-// src/entities/podcast.entity.ts
 import { Entity, PrimaryColumn } from "typeorm";
 import { NullableColumn } from "../decorators/nullable-column";
 

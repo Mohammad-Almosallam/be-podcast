@@ -42,7 +42,6 @@ export async function podcastRoutes(app: FastifyInstance) {
       const podcastRepo = AppDataSource.getRepository(Podcast);
       const episodeRepo = AppDataSource.getRepository(Episode);
 
-      // save new podcasts only (you can create a similar entity for episodes if needed)
       const podcastTrackIds = podcasts.map((p: any) => String(p.trackId));
       const existingPodcasts = await podcastRepo.find({
         where: {

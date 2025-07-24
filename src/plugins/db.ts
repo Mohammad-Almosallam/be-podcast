@@ -1,5 +1,4 @@
 import { DataSource } from "typeorm";
-import { Podcast } from "../entities/podcast.entity";
 import { config } from "../env";
 
 export const AppDataSource = new DataSource({
