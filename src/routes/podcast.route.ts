@@ -46,19 +46,20 @@ export async function podcastRoutes(app: FastifyInstance) {
       const podcastTrackIds = podcasts.map((p: any) => String(p.trackId));
       const existingPodcasts = await podcastRepo.find({
         where: {
-          trackId: In(podcastTrackIds),
+          id: In(podcastTrackIds),
         },
       });
       const existingPodcastMap = new Map(
-        existingPodcasts.map((p) => [String(p.trackId), p])
+        existingPodcasts.map((p) => [String(p.id), p])
       );
       const podcastsToInsert = podcasts
         .filter((r: any) => !existingPodcastMap.has(r.trackId))
         .map((r: any) =>
           podcastRepo.create({
-            trackId: String(r.trackId),
-            trackName: r.trackName,
-            artistName: r.artistName,
+            id: String(r.trackId),
+            title: r.trackName,
+            author: r.artistName,
+            imageUrl: r.artworkUrl600,
           })
         );
 
@@ -69,20 +70,24 @@ export async function podcastRoutes(app: FastifyInstance) {
       const episodeTrackIds = episodes.map((e: any) => String(e.trackId));
       const existingEpisodes = await episodeRepo.find({
         where: {
-          trackId: In(episodeTrackIds),
+          id: In(episodeTrackIds),
         },
       });
       const existingEpisodeMap = new Map(
-        existingEpisodes.map((e) => [String(e.trackId), e])
+        existingEpisodes.map((e) => [String(e.id), e])
       );
 
       const newEpisodes = episodes
         .filter((e: any) => !existingEpisodeMap.has(String(e.trackId)))
         .map((e: any) =>
           episodeRepo.create({
-            trackId: String(e.trackId),
-            trackName: e.trackName,
-            artistName: e.artistName,
+            id: String(e.trackId),
+            title: e.trackName,
+            description: e.description,
+            author: e.collectionName,
+            imageUrl: e.artworkUrl600,
+            publishedAt: e.releaseDate,
+            duration: String(e.trackTimeMillis),
           })
         );
 

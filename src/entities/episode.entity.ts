@@ -5,11 +5,23 @@ import { NullableColumn } from "../decorators/nullable-column";
 @Entity()
 export class Episode {
   @PrimaryColumn({ type: "text" }) // or just omit type, string is default
-  trackId: string;
+  id: string;
 
   @NullableColumn()
-  trackName: string; // title
+  title: string;
 
   @NullableColumn()
-  artistName: string; // author
+  description: string;
+
+  @NullableColumn()
+  author: string;
+
+  @NullableColumn()
+  imageUrl: string;
+
+  @NullableColumn()
+  publishedAt: string;
+
+  @NullableColumn()
+  duration: string;
 }
