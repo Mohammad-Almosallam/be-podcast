@@ -1,11 +1,14 @@
 import { DataSource } from "typeorm";
 import { config } from "../env";
+import { Podcast } from "../entities/podcast.entity";
+import { Episode } from "../entities/episode.entity";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
   url: config.dbUrl,
   synchronize: true,
-  entities: ["src/entities/*.ts"],
+  ssl: { rejectUnauthorized: false },
+  entities: [Podcast, Episode],
   logging: false,
 });
 
